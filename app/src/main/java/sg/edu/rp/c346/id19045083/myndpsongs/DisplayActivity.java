@@ -22,6 +22,7 @@ public class DisplayActivity extends AppCompatActivity {
     final boolean[] checker = {true};
     Spinner spn;
     ArrayList<String> years;
+    ArrayAdapter<String> SPNaa;
     CustomAdapter songAdapter;
 
     @Override
@@ -49,7 +50,7 @@ public class DisplayActivity extends AppCompatActivity {
                 years.add(yrs);
             }
         }
-        ArrayAdapter<String> SPNaa = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
+        SPNaa = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
         SPNaa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spn.setAdapter(SPNaa);
 
@@ -109,5 +110,17 @@ public class DisplayActivity extends AppCompatActivity {
         super.onResume();
         checker[0] = true;
         btnShow5Stars.performClick();
+
+        years.clear();
+        years.add("All Years");
+        for (int i=0; i < songArrayList.size(); i++) {
+            String yrs = String.valueOf(songArrayList.get(i).getYear());
+            if (!years.contains(yrs)){
+                years.add(yrs);
+            }
+        }
+        SPNaa = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, years);
+        SPNaa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spn.setAdapter(SPNaa);
     }
 } //DisplayActivity class
